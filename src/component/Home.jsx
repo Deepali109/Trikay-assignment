@@ -4,7 +4,10 @@ import StudyJourney from "./mainContent/StudyJourney";
 import RightContent from "./mainContent/RightContent";
 import LeftContent from "./mainContent/LeftContent";
 import Footer from "./footer/Footer";
-
+import Link from "next/link";
+// import { useRouter } from "next/router";
+// const navigate= useRouter();
+// navigate.replace('/home')
 function Home() {
   return (
     <div className="flex flex-row">

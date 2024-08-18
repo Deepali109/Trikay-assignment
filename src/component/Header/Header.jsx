@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import logo from "../images/logo.png";
 import { MdAdd } from "react-icons/md";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
@@ -9,7 +10,7 @@ function Header() {
       <div className="flex items-center space-x-4">
         {/* Logo Section */}
         <div className="flex items-center space-x-2">
-          <img src={logo} alt="Logo" className="h-7" />
+          <Image src={logo} alt="Logo" className="h-7 w-7" />
           <h1 className="text-2xl font-bold flex">
             Becker
             <span>

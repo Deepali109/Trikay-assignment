@@ -32,7 +32,7 @@ function RightContent() {
           <IoCalendarClearOutline />
         </div>
         <div className="flex flex-col">
-          <div className="">
+          <div className="flex justify-center">
             <h5 className="text-sm font-bold mt-2">
               You have not set up your Study Plan.
             </h5>
@@ -43,7 +43,7 @@ function RightContent() {
               study time better and easily reach your study goals!
             </h5>
           </div>
-          <div className="">
+          <div className="flex justify-center">
             <button className=" bg-gray-800 text-white font-bold p-2 rounded-md mt-7 mb-7 hover:bg-gray-700">
               Create your Study Plan
             </button>
