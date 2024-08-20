@@ -12,7 +12,8 @@ import { styled } from "@mui/material/styles";
 import { IoMdArrowDropdown } from "react-icons/io";
 import Image from "next/image";
 import hexaImage from "../images/hexagonn.png";
-
+import { IoIosArrowForward } from "react-icons/io";
+import { useRouter } from "next/router";
 // Custom StepIcon component with hexagon shape
 const Hexagon = styled("div")(({ active, completed }) => ({
   width: 22,
@@ -129,6 +130,10 @@ export default function StudyJourney() {
   const handleReset = () => {
     setActiveStep(0);
   };
+  const navigate = useRouter();
+  const handleDescription = () => {
+    navigate.replace("/a1-auditreport");
+  };
 
   return (
     <Box
@@ -160,22 +165,29 @@ export default function StudyJourney() {
       >
         {steps.map((step, index) => (
           <Step key={index}>
-            <StepLabel StepIconComponent={HexagonStepIcon}>
-              <Typography
-                variant="h6"
-                component="span"
-                sx={{ fontSize: ".9rem", color: "orange" }}
-              >
-                {step.stepName}
-              </Typography>{" "}
-              <Typography
-                variant="h6"
-                component="span"
-                sx={{ fontSize: ".8rem", color: "black" }}
-              >
-                {step.label}
-              </Typography>
-            </StepLabel>
+            <div className=" flex justify-between items-center hover:bg-gray-100">
+              <div className="">
+                <StepLabel StepIconComponent={HexagonStepIcon}>
+                  <Typography
+                    variant="h6"
+                    component="span"
+                    sx={{ fontSize: ".9rem", color: "orange" }}
+                  >
+                    {step.stepName}
+                  </Typography>{" "}
+                  <Typography
+                    variant="h6"
+                    component="span"
+                    sx={{ fontSize: ".8rem", color: "black" }}
+                  >
+                    {step.label}
+                  </Typography>
+                </StepLabel>
+              </div>
+              <div className="cursor-pointer" onClick={handleDescription}>
+                <IoIosArrowForward />
+              </div>
+            </div>
             {activeStep === index && (
               <Box sx={{ mb: 2 }}>
                 <div>
