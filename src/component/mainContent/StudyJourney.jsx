@@ -4,16 +4,16 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
-import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import StepConnector from "@mui/material/StepConnector";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle"; // Import checkmark icon from Material-UI
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { styled } from "@mui/material/styles";
 import { IoMdArrowDropdown } from "react-icons/io";
 import Image from "next/image";
 import hexaImage from "../images/hexagonn.png";
 import { IoIosArrowForward } from "react-icons/io";
-import { useRouter } from "next/router";
+import Link from "next/link";
+
 // Custom StepIcon component with hexagon shape
 const Hexagon = styled("div")(({ active, completed }) => ({
   width: 22,
@@ -26,7 +26,7 @@ const Hexagon = styled("div")(({ active, completed }) => ({
   color: "#fff",
   fontWeight: "bold",
   fontSize: "0.5rem",
-  zIndex: 1, // Ensure hexagon is on top
+  zIndex: 1,
 }));
 
 function HexagonStepIcon(props) {
@@ -43,28 +43,27 @@ function HexagonStepIcon(props) {
 // Custom connector with a broad vertical line and hexagon shapes
 const HexagonStepConnector = styled(StepConnector)(({ theme }) => ({
   [`& .${StepConnector.line}`]: {
-    borderColor: "orange", // Show the line with a color
-    borderLeftWidth: 8, // Broader vertical line
-    borderStyle: "solid", // Ensure the border style is solid
-    minHeight: 24, // Adjust the height to ensure visibility
+    borderColor: "orange",
+    borderLeftWidth: 8,
+    borderStyle: "solid",
+    minHeight: 24,
     position: "relative",
-    // Adding a pseudo-element for a visual line connecting to the hexagon
     "::before": {
       content: '""',
       position: "absolute",
-      left: "-14px", // Adjust this value to align with the hexagon
+      left: "-14px",
       top: "50%",
-      width: "14px", // Line width
+      width: "14px",
       height: "1px",
       backgroundColor: "orange",
       transform: "translateY(-50%)",
     },
   },
   [`& .${StepConnector.lineVertical}`]: {
-    marginLeft: 8, // Align with the hexagon
+    marginLeft: 8,
   },
   [`& .${StepConnector.root}`]: {
-    backgroundColor: "transparent", // Ensure background doesn't interfere
+    backgroundColor: "transparent",
   },
 }));
 
@@ -72,47 +71,58 @@ const steps = [
   {
     stepName: "A1",
     label: "Audit Reports",
+    link: "/a1-auditreport",
   },
   {
     stepName: "A2",
     label: "Engagement Quality and Acceptance, Planning, and Internal Control",
+    link: "/a2",
   },
   {
     stepName: "A3",
     label: "Risk, Evidence, and Sampling",
+    link: "/a3",
   },
   {
     stepName: "Mini Exam 1",
     label: "",
+    link: "/mini-exam-1",
   },
   {
     stepName: "A4",
     label:
       "Performing Further Procedures, Forming Conclusions, and Communication...",
+    link: "/a4",
   },
   {
     stepName: "Mini Exam 2",
     label: "",
+    link: "/mini-exam-2",
   },
   {
     stepName: "A5",
     label: "Integrated Audits, Attestation Engagements, Compliance, and ...",
+    link: "/a5",
   },
   {
     stepName: "A6",
     label: "Accounting and Review Service Engagements, Interim Reviews, and...",
+    link: "/a6",
   },
   {
     stepName: "Mini Exam 3",
     label: "",
+    link: "/mini-exam-3",
   },
   {
     stepName: "Simulated Exam 1",
     label: "",
+    link: "/simulated-exam-1",
   },
   {
     stepName: "Simulated Exam 2",
     label: "",
+    link: "/simulated-exam-2",
   },
 ];
 
@@ -130,10 +140,6 @@ export default function StudyJourney() {
   const handleReset = () => {
     setActiveStep(0);
   };
-  const navigate = useRouter();
-  const handleDescription = () => {
-    navigate.replace("/a1-auditreport");
-  };
 
   return (
     <Box
@@ -144,7 +150,7 @@ export default function StudyJourney() {
       }}
     >
       <div className="flex">
-        <div className="">
+        <div>
           <Image
             src={hexaImage}
             alt="Logo"
@@ -165,80 +171,32 @@ export default function StudyJourney() {
       >
         {steps.map((step, index) => (
           <Step key={index}>
-            <div className=" flex justify-between items-center hover:bg-gray-100">
-              <div className="">
-                <StepLabel StepIconComponent={HexagonStepIcon}>
-                  <Typography
-                    variant="h6"
-                    component="span"
-                    sx={{ fontSize: ".9rem", color: "orange" }}
-                  >
-                    {step.stepName}
-                  </Typography>{" "}
-                  <Typography
-                    variant="h6"
-                    component="span"
-                    sx={{ fontSize: ".8rem", color: "black" }}
-                  >
-                    {step.label}
-                  </Typography>
-                </StepLabel>
-              </div>
-              <div className="cursor-pointer" onClick={handleDescription}>
-                <IoIosArrowForward />
-              </div>
-            </div>
-            {activeStep === index && (
-              <Box sx={{ mb: 2 }}>
-                <div>
-                  <Button
-                    onClick={handleNext}
-                    sx={{
-                      mr: 1,
-                      fontSize: ".75rem",
-                      backgroundColor: "orange",
-                      color: "white",
-                      ":hover": {
-                        backgroundColor: "#eab148", // Change to the desired hover color
-                        color: "#fff", // Optionally adjust text color on hover
-                      },
-                    }}
-                  >
-                    {index === steps.length - 1 ? "Finish" : "Continue"}
-                  </Button>
-                  <Button
-                    disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{
-                      mr: 1,
-                      fontSize: ".75rem",
-                      backgroundColor: "orange",
-                      color: "white",
-                      ":hover": {
-                        backgroundColor: "#eab148", // Change to the desired hover color
-                        color: "#fff", // Optionally adjust text color on hover
-                      },
-                    }}
-                  >
-                    Back
-                  </Button>
-                </div>
-              </Box>
-            )}
+            <Link
+              href={step.link}
+              className="flex justify-between items-center hover:bg-gray-100"
+            >
+              <StepLabel StepIconComponent={HexagonStepIcon}>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  sx={{ fontSize: ".9rem", color: "orange" }}
+                >
+                  {step.stepName}
+                </Typography>{" "}
+                <Typography
+                  variant="h6"
+                  component="span"
+                  sx={{ fontSize: ".8rem", color: "black" }}
+                >
+                  {step.label}
+                </Typography>
+              </StepLabel>
+              <IoIosArrowForward />
+            </Link>
           </Step>
         ))}
       </Stepper>
-      {activeStep === steps.length && (
-        <Paper square elevation={0} sx={{ p: 3 }}>
-          <Typography>Finished!</Typography>
-          {/* <Button
-            onClick={handleReset}
-            sx={{ mt: 1, mr: 1, backgroundColor: "orange" }}
-          >
-            Reset
-          </Button> */}
-        </Paper>
-      )}
+
       <button className=" bg-gray-800 w-full text-white font-bold p-2 rounded-md mt-5 mb-7 hover:bg-gray-700">
         Switch to Final Review
       </button>
